@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lens & Co — Istanbul Photography</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --off-black: #111111;
+      --dark: #1a1a1a;
+      --gold: #c9963a;
+      --cream: #f0ebe0;
+      --gray: #888;
+      --light: #e8e2d6;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 28px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      mix-blend-mode: normal;
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 300;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--cream);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--gold); }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--cream); }
+
+    /* HERO */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 80px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 70% 40%, rgba(201, 150, 58, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 80%, rgba(201, 150, 58, 0.05) 0%, transparent 50%);
+    }
+
+    .hero-grid {
+      position: absolute;
+      right: 60px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 8px;
+      width: 420px;
+      height: 520px;
+    }
+
+    .hero-img {
+      background: var(--dark);
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-img:nth-child(1) { grid-row: 1 / 3; background: #1e1e1e; }
+    .hero-img:nth-child(2) { background: #252525; }
+    .hero-img:nth-child(3) { background: #1c1c1c; }
+
+    .hero-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(201,150,58,0.1) 0%, transparent 100%);
+    }
+
+    .hero-img svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.15;
+    }
+
+    .hero-content { position: relative; max-width: 560px; }
+
+    .hero-tag {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 7vw, 88px);
+      font-weight: 300;
+      line-height: 1.05;
+      margin-bottom: 28px;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.8;
+      max-width: 380px;
+      margin-bottom: 48px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--black);
+      padding: 14px 36px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.3s;
+    }
+
+    .btn-primary:hover { opacity: 0.85; }
+
+    .btn-ghost {
+      color: var(--cream);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: color 0.3s;
+    }
+
+    .btn-ghost:hover { color: var(--gold); }
+
+    .btn-ghost::after {
+      content: '→';
+      font-size: 16px;
+    }
+
+    /* ABOUT */
+    .about {
+      padding: 140px 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+      height: 500px;
+    }
+
+    .about-block {
+      position: absolute;
+      border-radius: 2px;
+    }
+
+    .about-block-1 {
+      width: 75%;
+      height: 85%;
+      background: var(--dark);
+      top: 0; left: 0;
+    }
+
+    .about-block-2 {
+      width: 55%;
+      height: 60%;
+      background: #1e1e1e;
+      bottom: 0; right: 0;
+      border: 1px solid rgba(201, 150, 58, 0.2);
+    }
+
+    .about-stat {
+      position: absolute;
+      bottom: 80px;
+      left: -20px;
+      background: var(--off-black);
+      border: 1px solid rgba(201, 150, 58, 0.3);
+      padding: 24px 32px;
+    }
+
+    .about-stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .about-stat-label {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-top: 6px;
+    }
+
+    .about-tag {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .about-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 4vw, 52px);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 28px;
+    }
+
+    .about-text {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 2;
+      margin-bottom: 20px;
+    }
+
+    .about-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      margin: 36px 0;
+    }
+
+    /* SERVICES */
+    .services {
+      padding: 100px 60px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 64px;
+    }
+
+    .section-tag {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 300;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .service-card {
+      background: var(--off-black);
+      padding: 48px 40px;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.3s;
+      cursor: default;
+    }
+
+    .service-card:hover {
+      border-bottom-color: var(--gold);
+    }
+
+    .service-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 64px;
+      font-weight: 300;
+      color: rgba(201,150,58,0.15);
+      line-height: 1;
+      margin-bottom: 24px;
+    }
+
+    .service-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 300;
+      margin-bottom: 16px;
+    }
+
+    .service-desc {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.9;
+    }
+
+    .service-price {
+      margin-top: 28px;
+      font-size: 12px;
+      letter-spacing: 1px;
+      color: var(--gold);
+    }
+
+    /* PORTFOLIO */
+    .portfolio {
+      padding: 100px 60px;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 300px 300px;
+      gap: 8px;
+      margin-top: 48px;
+    }
+
+    .portfolio-item {
+      background: var(--dark);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .portfolio-item:nth-child(1) { grid-row: 1 / 3; background: #1e1e1e; }
+    .portfolio-item:nth-child(4) { background: #252525; }
+
+    .portfolio-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(10,10,10,0.7);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 28px;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+
+    .portfolio-cat {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .portfolio-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 300;
+    }
+
+    .portfolio-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.08;
+    }
+
+    /* CONTACT */
+    .contact {
+      padding: 140px 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .contact-info { }
+
+    .contact-detail {
+      margin-bottom: 40px;
+    }
+
+    .contact-label {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .contact-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--cream);
+    }
+
+    .contact-form { }
+
+    .form-group { margin-bottom: 24px; }
+
+    .form-group label {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 10px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      background: var(--off-black);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--cream);
+      padding: 14px 18px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 300;
+      outline: none;
+      transition: border-color 0.3s;
+      border-radius: 0;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    .form-status {
+      margin-top: 12px;
+      font-size: 13px;
+      display: none;
+    }
+
+    .form-status.success { color: #6bcb77; display: block; }
+    .form-status.error { color: #ff6b6b; display: block; }
+
+    /* FOOTER */
+    footer {
+      padding: 40px 60px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--cream);
+    }
+
+    .footer-logo span { color: var(--gold); }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--gray);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      .nav-links { display: none; }
+      .hero { padding: 100px 24px 60px; }
+      .hero-grid { display: none; }
+      .about, .contact { grid-template-columns: 1fr; gap: 60px; padding: 80px 24px; }
+      .services { padding: 80px 24px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .portfolio { padding: 80px 24px; }
+      .portfolio-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .portfolio-item:nth-child(1) { grid-row: auto; grid-column: 1 / 3; height: 300px; }
+      footer { flex-direction: column; gap: 16px; text-align: center; padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Lens<span>&</span>Co</a>
+  <ul class="nav-links">
+    <li><a href="#about">Hakkımızda</a></li>
+    <li><a href="#services">Hizmetler</a></li>
+    <li><a href="#portfolio">Portfolyo</a></li>
+    <li><a href="#contact">İletişim</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid">
+    <div class="hero-img">
+      <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+        <circle cx="40" cy="40" r="30" stroke="#c9963a" stroke-width="1"/>
+        <circle cx="40" cy="40" r="15" stroke="#c9963a" stroke-width="1"/>
+        <line x1="40" y1="10" x2="40" y2="70" stroke="#c9963a" stroke-width="0.5"/>
+        <line x1="10" y1="40" x2="70" y2="40" stroke="#c9963a" stroke-width="0.5"/>
+      </svg>
+    </div>
+    <div class="hero-img">
+      <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+        <rect x="10" y="10" width="40" height="40" stroke="#c9963a" stroke-width="1"/>
+        <rect x="20" y="20" width="20" height="20" fill="rgba(201,150,58,0.2)"/>
+      </svg>
+    </div>
+    <div class="hero-img">
+      <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+        <polygon points="30,5 55,50 5,50" stroke="#c9963a" stroke-width="1" fill="none"/>
+      </svg>
+    </div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-tag">Istanbul Photography Studio</p>
+    <h1 class="hero-title">Her Kare<br />Bir <em>Hikaye</em></h1>
+    <p class="hero-sub">Marka fotoğrafçılığından mimari çekimlere, her anı sanatsal bir bakış açısıyla ölümsüzleştiriyoruz.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">Proje Başlat</a>
+      <a href="#portfolio" class="btn-ghost">Portfolyoyu Gör</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-visual">
+    <div class="about-block about-block-1"></div>
+    <div class="about-block about-block-2"></div>
+    <div class="about-stat">
+      <div class="about-stat-num">8+</div>
+      <div class="about-stat-label">Yıl Deneyim</div>
+    </div>
+  </div>
+  <div class="about-content">
+    <p class="about-tag">Hakkımızda</p>
+    <h2 class="about-title">Işığı Sanatla Buluşturan Stüdyo</h2>
+    <p class="about-text">2016 yılında İstanbul'da kurulan Lens & Co, markaların ve bireylerin hikayelerini güçlü görsel anlatılarla hayata geçiriyor.</p>
+    <p class="about-text">Her çekim, özgün bir bakış açısı ve detaylara verilen sonsuz özenle şekillenir.</p>
+    <div class="about-divider"></div>
+    <p class="about-text" style="font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; color: var(--cream);">"Fotoğraf, gözle görünenin ötesinde bir gerçekliği yakalar."</p>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header">
+    <div>
+      <p class="section-tag">Hizmetler</p>
+      <h2 class="section-title">Ne Sunuyoruz?</h2>
+    </div>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <h3 class="service-title">Marka Fotoğrafçılığı</h3>
+      <p class="service-desc">Markanızın kimliğini, ürünlerinizi ve ekibinizi profesyonel bir bakış açısıyla belgeleyin.</p>
+      <p class="service-price">₺8.000'den başlayan fiyatlarla</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <h3 class="service-title">Mimari & İç Mekan</h3>
+      <p class="service-desc">Mekanlarınızın ruhunu ve detaylarını en doğal ışıkla çerçeveliyoruz.</p>
+      <p class="service-price">₺6.000'den başlayan fiyatlarla</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <h3 class="service-title">Portre & Editoryal</h3>
+      <p class="service-desc">Bireysel portelerden kurumsal editoryal çekimlere kadar geniş bir yelpazede hizmet.</p>
+      <p class="service-price">₺3.500'den başlayan fiyatlarla</p>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+  <div class="section-header">
+    <div>
+      <p class="section-tag">Portfolyo</p>
+      <h2 class="section-title">Seçki</h2>
+    </div>
+    <a href="#contact" class="btn-ghost">Tüm Projeler</a>
+  </div>
+  <div class="portfolio-grid">
+    <div class="portfolio-item">
+      <svg class="portfolio-icon" width="120" height="120" viewBox="0 0 120 120" fill="none">
+        <circle cx="60" cy="60" r="50" stroke="#c9963a" stroke-width="1"/>
+        <circle cx="60" cy="60" r="25" stroke="#c9963a" stroke-width="1"/>
+      </svg>
+      <div class="portfolio-overlay">
+        <p class="portfolio-cat">Marka</p>
+        <p class="portfolio-name">Nomad Coffee Roasters</p>
+      </div>
+    </div>
+    <div class="portfolio-item">
+      <svg class="portfolio-icon" width="80" height="80" viewBox="0 0 80 80" fill="none">
+        <rect x="10" y="10" width="60" height="60" stroke="#c9963a" stroke-width="1"/>
+        <rect x="25" y="25" width="30" height="30" fill="rgba(201,150,58,0.15)"/>
+      </svg>
+      <div class="portfolio-overlay">
+        <p class="portfolio-cat">Mimari</p>
+        <p class="portfolio-name">Bosphorus Residence</p>
+      </div>
+    </div>
+    <div class="portfolio-item" style="background:#1a1a1a">
+      <svg class="portfolio-icon" width="80" height="80" viewBox="0 0 80 80" fill="none">
+        <polygon points="40,5 75,70 5,70" stroke="#c9963a" stroke-width="1" fill="none"/>
+      </svg>
+      <div class="portfolio-overlay">
+        <p class="portfolio-cat">Editoryal</p>
+        <p class="portfolio-name">Vogue Turkey</p>
+      </div>
+    </div>
+    <div class="portfolio-item">
+      <svg class="portfolio-icon" width="80" height="80" viewBox="0 0 80 80" fill="none">
+        <line x1="10" y1="10" x2="70" y2="70" stroke="#c9963a" stroke-width="1"/>
+        <line x1="70" y1="10" x2="10" y2="70" stroke="#c9963a" stroke-width="1"/>
+        <circle cx="40" cy="40" r="20" stroke="#c9963a" stroke-width="1"/>
+      </svg>
+      <div class="portfolio-overlay">
+        <p class="portfolio-cat">Portre</p>
+        <p class="portfolio-name">Zeynep Arslan Studio</p>
+      </div>
+    </div>
+    <div class="portfolio-item" style="background:#222">
+      <svg class="portfolio-icon" width="80" height="80" viewBox="0 0 80 80" fill="none">
+        <rect x="5" y="20" width="70" height="45" rx="2" stroke="#c9963a" stroke-width="1"/>
+        <circle cx="40" cy="42" r="12" stroke="#c9963a" stroke-width="1"/>
+      </svg>
+      <div class="portfolio-overlay">
+        <p class="portfolio-cat">Ürün</p>
+        <p class="portfolio-name">Argan Botanica</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-info">
+    <p class="section-tag">İletişim</p>
+    <h2 class="section-title" style="margin-bottom: 48px;">Projenizi<br />Konuşalım</h2>
+    <div class="contact-detail">
+      <p class="contact-label">Adres</p>
+      <p class="contact-value">Karaköy, İstanbul</p>
+    </div>
+    <div class="contact-detail">
+      <p class="contact-label">E-posta</p>
+      <p class="contact-value">merhaba@lensco.com.tr</p>
+    </div>
+    <div class="contact-detail">
+      <p class="contact-label">WhatsApp</p>
+      <p class="contact-value">+90 532 000 00 00</p>
+    </div>
+  </div>
+  <div class="contact-form">
+    <form id="contactForm">
+      <div class="form-group">
+        <label>Adınız</label>
+        <input type="text" name="name" required placeholder="Adınız Soyadınız" />
+      </div>
+      <div class="form-group">
+        <label>E-posta</label>
+        <input type="email" name="email" required placeholder="ornek@email.com" />
+      </div>
+      <div class="form-group">
+        <label>Mesajınız</label>
+        <textarea name="message" required placeholder="Projenizi kısaca anlatın..."></textarea>
+      </div>
+      <button type="submit" class="btn-primary" style="width:100%; cursor:pointer; border:none; font-family:'Inter',sans-serif;">Gönder</button>
+      <p class="form-status" id="formStatus"></p>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Lens<span>&</span>Co</div>
+  <p class="footer-copy">© 2026 Lens & Co. Tüm hakları saklıdır.</p>
+</footer>
+
+<script>
+  document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const status = document.getElementById('formStatus');
+    const btn = this.querySelector('button');
+    btn.textContent = 'Gönderiliyor...';
+    btn.disabled = true;
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: this.name.value,
+          email: this.email.value,
+          message: this.message.value
+        })
+      });
+      if (res.ok) {
+        status.textContent = 'Mesajınız iletildi. En kısa sürede dönüş yapacağız.';
+        status.className = 'form-status success';
+        this.reset();
+      } else { throw new Error(); }
+    } catch {
+      status.textContent = 'Bir hata oluştu. Lütfen tekrar deneyin.';
+      status.className = 'form-status error';
+    }
+    btn.textContent = 'Gönder';
+    btn.disabled = false;
+  });
+</script>
+</body>
+</html>
